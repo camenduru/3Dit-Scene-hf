@@ -60,20 +60,14 @@ COPY requirements.txt /tmp
 RUN cd /tmp && pip install -r requirements.txt
 RUN pip install -U fastapi pydantic
 
-RUN ls .
-
-
 RUN rm -rf /home/${USER_NAME}/threestudio
 RUN rm -rf /home/${USER_NAME}/.cache
-
-RUN ls .
 
 ADD "https://api.github.com/repos/zqh0253/3DitScene/commits?per_page=1" latest_commit
 RUN git clone https://github.com/zqh0253/3DitScene.git /home/${USER_NAME}/threestudio --recursive
 
 WORKDIR /home/${USER_NAME}/threestudio
 
-RUN wget --quiet https://www.dropbox.com/scl/fi/ubyeroi2b85y78mbyy9or/1.zip?rlkey=b1sfgbmlmx3jz4onwk9qjj2rs -O tmp.zip
 RUN wget --quiet https://www.dropbox.com/scl/fi/2s4b848d4qqrz87bbfc2z/cache.zip?rlkey=f7tyf4952ey253xlzvb1lwnmc -O tmp.zip
 RUN unzip tmp.zip
 
